@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput, StyleSheet, Alert, ActivityIndicator } f
 import { useAddUserMutation, useGetUserQuery, useUpdateUserMutation } from './cdkCrud';
 
 export default function CrudScreen({ route,navigation }) {
-  const { item } = route.params ?? {}; // Provide a default value for item if route.params is undefined
+  const { item } = route.params ?? {}; 
 
   const [updateUser] = useUpdateUserMutation();
   const { refetch } = useGetUserQuery();
@@ -13,7 +13,6 @@ export default function CrudScreen({ route,navigation }) {
   const [email, setEmail] = useState('');
   const [id, setId] = useState('');
 
-  // Set initial state based on the passed item, if any
   useEffect(() => {
     if (item) {
       setName(item.name);

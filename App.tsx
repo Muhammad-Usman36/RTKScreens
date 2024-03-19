@@ -2,13 +2,10 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './HomeScreen';
-import DetailScreen from './DetailScreen';
-import Get from './Get';
+import Get from './redux/Get';
 import { Provider } from 'react-redux';
-import { store } from './store';
-import CrudScreen from './CrudScreen';
-import EditUserDataScreen from './EditUserDataScreen';
+import { store } from './redux/store';
+import CrudScreen from './redux/CrudScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +15,6 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name='Get' component={Get}/>
-      <Stack.Screen name='EditUserDataScreen' component={EditUserDataScreen}/>
         <Stack.Screen name="CrudScreen" component={CrudScreen} />
       </Stack.Navigator>
     </NavigationContainer>
