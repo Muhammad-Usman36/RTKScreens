@@ -13,8 +13,8 @@ const DetailScreen = ({ navigation }) => {
 
       </Provider>
       <Button
-        title="Go back"
-        onPress={() => navigation.goBack()}
+        title="ADD Data"
+        onPress={() => navigation.navigate('Home')}
       />
     </View>
   );
