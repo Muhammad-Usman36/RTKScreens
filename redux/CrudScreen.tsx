@@ -26,7 +26,6 @@ export default function CrudScreen({ route,navigation }) {
 
   const handleAddOrUpdateUser = () => {
     if (item) {
-      // Perform update operation
       updateUser({
         "id": Number(id),
         "name": name,
@@ -40,7 +39,6 @@ export default function CrudScreen({ route,navigation }) {
         refetch();
       });
     } else {
-      // Perform add operation
       if (name && email && password && id) {
         addUser({
           "id": id,

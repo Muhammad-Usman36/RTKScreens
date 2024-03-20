@@ -20,6 +20,7 @@ export default function Get({ navigation }) {
   const [id, setId] = useState('');
 
   const [isEditing, setIsEditing] = useState(false); // State to manage edit mode
+  const [searchQuery, setSearchQuery] = useState('');
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -28,6 +29,10 @@ export default function Get({ navigation }) {
     }
   }, [data]);
 
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleDelete = (item) => {
     deleteUser(Number(item)).then(() => {
@@ -46,21 +51,20 @@ export default function Get({ navigation }) {
       setPassword('');
       setEmail('');
       setId('');
-      setDeleteUserId(null); // Reset deleteUserId after update
-      setIsEditing(false); // Disable edit mode
+      setDeleteUserId(null); 
+      setIsEditing(false); 
       refetch();
     });
   };
 
   const handleEdit = (item) => {
-    setName(item.name); // Populate name field with user's name
-    setPassword(item.password); // Populate password field with user's password
-    setEmail(item.email); // Populate email field with user's email
-    setId(item.id.toString()); // Populate id field with user's id
-    setDeleteUserId(item.id); // Set deleteUserId to the id of the user being edited
-    setIsEditing(true); // Enable edit mode
+    setName(item.name); 
+    setPassword(item.password); 
+    setEmail(item.email); 
+    setId(item.id.toString()); 
+    setDeleteUserId(item.id); 
+    setIsEditing(true); 
   };
-
 
   const handleEdit2 = (item) => {
     navigation.navigate('CrudScreen', { item });
@@ -72,19 +76,18 @@ export default function Get({ navigation }) {
         <TextInput
           placeholder="Search"
           style={styles.Tin}
+          onChangeText={setSearchQuery}
         />
         <Button
-        title="ADD Data"
-        onPress={() => navigation.navigate('CrudScreen')}
-      />
-
-      
+          title="ADD Data"
+          onPress={() => navigation.navigate('CrudScreen')}
+        />
 
         {isFetching ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
           <>
-            {data?.length > 0 ? users?.map((item) => {
+            {filteredUsers.length > 0 ? filteredUsers.map((item) => {
               return (
                 <View key={item.id}>
                   <View style={{ paddingVertical: 10 }}>
@@ -113,7 +116,7 @@ export default function Get({ navigation }) {
                     <View style={{ height: 1, backgroundColor: 'black' }}></View>
                   </View>
 
-                  {isEditing && deleteUserId === item.id && ( // Render edit fields only if editing mode is enabled for this item
+                  {isEditing && deleteUserId === item.id && ( 
                     <>
                       <TextInput
                         placeholder="Name"

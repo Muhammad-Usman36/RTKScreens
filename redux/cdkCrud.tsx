@@ -1,8 +1,6 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { Pokemon } from './types'
 
-// Define a service using a base URL and expected endpoints
 export const cdkCrudApi = createApi({
   reducerPath: 'cdkCrudApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://cdk-crud-test.onrender.com/' }),
@@ -18,8 +16,6 @@ export const cdkCrudApi = createApi({
           body,
         }
       },
-      // Invalidates all Post-type queries providing the `LIST` id - after all, depending of the sort order,
-      // that newly created post could show up in any lists.
     }),
     deleteUser: builder.mutation({
       query: (id) => ({
@@ -35,12 +31,8 @@ export const cdkCrudApi = createApi({
          body:body
         }
       },
-      // Invalidates all Post-type queries providing the `LIST` id - after all, depending of the sort order,
-      // that newly created post could show up in any lists.
     }),
   }),
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const {useUpdateUserMutation, useGetUserQuery,useAddUserMutation,useDeleteUserMutation } = cdkCrudApi
